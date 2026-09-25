@@ -16,6 +16,17 @@ DOMReady(function () {
         document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;SameSite=Lax`;
     }
 
+    function clearCookies() {
+        const host = window.location.hostname;
+        document.cookie.split(';').forEach(function (pair) {
+            const name = pair.split('=')[0].trim();
+            if (!name || name === 'kp_cookie_consent') return;
+            ['', `;domain=${host}`, `;domain=.${host}`].forEach(function (domain) {
+                document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/${domain}`;
+            });
+        });
+    }
+
     function disableScroll() {
         document.body.style.overflow = 'hidden';
         document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
@@ -67,6 +78,11 @@ DOMReady(function () {
     // Check if user has made any choice
     const cookieConsent = getCookie('kp_cookie_consent');
 
+    // Keep wiping anything set client-side while declined
+    if (cookieConsent === 'declined') {
+        clearCookies();
+    }
+
     // Show cookie notice only if no consent decision has been made
     if (notice && overlay && !cookieConsent) {
         notice.style.display = 'block';
@@ -89,8 +105,12 @@ DOMReady(function () {
     // Decline cookies
     if (declineBtn) {
         declineBtn.addEventListener('click', function () {
-            setCookie('kp_cookie_consent', 'declined', 365);
-            window.location.href = 'https://www.google.com/search?q=why+do+I+need+cookies';
+            setCookie('kp_cookie_consent', 'declined', 182);
+            clearCookies();
+            fetch(window.location.href, { method: 'HEAD', credentials: 'same-origin', cache: 'no-store' }).catch(function () { });
+            notice.style.display = 'none';
+            overlay.style.display = 'none';
+            enableScroll();
         });
     }
 

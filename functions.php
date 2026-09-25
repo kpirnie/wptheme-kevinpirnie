@@ -29,6 +29,55 @@ add_action('save_post', function ($post_id) {
     delete_transient('kpt_breadcrumbs_' . $post_id);
 }, 10, 1);
 
+// Wipe every cookie but the consent choice on each request once cookies have been declined
+add_action('init', function () {
+
+    // leave the admin and login alone, and only act on a decline
+    if (is_admin() || 'wp-login.php' === ($GLOBALS['pagenow'] ?? '') || 'declined' !== ($_COOKIE['kp_cookie_consent'] ?? '')) {
+        return;
+    }
+
+    // right before the headers go out
+    header_register_callback(function () {
+
+        // drop anything set during this request
+        header_remove('Set-Cookie');
+
+        // pull the raw names so array-style cookie names stay intact
+        $names = array();
+        foreach (explode(';', $_SERVER['HTTP_COOKIE'] ?? '') as $pair) {
+            $name = trim(strstr($pair, '=', true) ?: $pair);
+            if ('' !== $name && 'kp_cookie_consent' !== $name) {
+                $names[] = $name;
+            }
+        }
+
+        // nothing to wipe
+        if (empty($names)) {
+            return;
+        }
+
+        // every path and domain they could live on
+        $host = parse_url(home_url(), PHP_URL_HOST);
+        $paths = array_unique(array('/', COOKIEPATH, SITECOOKIEPATH));
+        $domains = array_unique(array_filter(array('', '.' . $host, (string) COOKIE_DOMAIN), 'is_string'));
+
+        // expire them all
+        foreach (array_unique($names) as $name) {
+            foreach ($paths as $path) {
+                foreach ($domains as $domain) {
+                    setcookie($name, '', array('expires' => 1, 'path' => $path, 'domain' => $domain, 'secure' => is_ssl(), 'samesite' => 'Lax'));
+                }
+            }
+        }
+
+        // the auth cookies live on the admin and plugin paths, so let core clear those
+        if (preg_grep('/^' . preg_quote(LOGGED_IN_COOKIE, '/') . '$/', $names)) {
+            wp_clear_auth_cookie();
+        }
+    });
+}, 0);
+
 function is_parent_page($page_id = null)
 {
     if ((is_page('about-kevin-pirnie/privacy-policy') || is_page('about-kevin-pirnie/cookie-policy') || is_page('about-kevin-pirnie/lets-talk')) || is_front_page()) {
