@@ -105,6 +105,10 @@ add_action('wp_head', function () {
                 ad_personalization: state,
                 analytics_storage: state
             });
+            if (state !== 'granted') {
+                window.a2a_config = window.a2a_config || {};
+                window.a2a_config.no_3p = 1;
+            }
         })();
     </script>
 <?php
