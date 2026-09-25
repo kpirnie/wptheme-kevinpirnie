@@ -1,0 +1,33 @@
+/*
+Theme Name: Kevin Pirnie's Theme'
+Theme URI: https://kevinpirnie.com
+Author: Kevin Pirnie
+Author URI: https://kevinpirnie
+Description: A performance-focused Tailwind WordPress dark theme
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: kpt
+*/
+
+:root {
+    --kp-light-blue: #599bb8;
+    --kp-lightish-blue: #43819c;
+    --kp-orange: #fd6a4f;
+    --kp-gray: #2d7696;
+    --kp-darkish-blue: #599bb8;
+    --kp-dark-blue: #43819c;
+    --kp-darkest-blue: #2d7696;
+    --kp-navy: #000d2d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+    line-height: 1.6;
+}

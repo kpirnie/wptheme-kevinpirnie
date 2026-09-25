@@ -1,0 +1,168 @@
+/* Resume Print Styles */
+
+/* Print Styles */
+@media print {
+
+    /* Show everything by default */
+    body * {
+        visibility: visible;
+    }
+
+    /* Hide navigation, headers, footers */
+    header,
+    footer,
+    nav,
+    .print-wrap,
+    #top-header,
+    #main-header,
+    #scroll-to-top,
+    .wp-block-buttons,
+    .wp-block-button {
+        display: none !important;
+    }
+
+    /* Make sure article content is visible */
+    .article-content,
+    .article-content * {
+        visibility: visible !important;
+    }
+
+    /* Reset positioning for print */
+    .article-content {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure everything is black and white for printing */
+    body,
+    .article-content,
+    .article-content * {
+        background: white !important;
+        color: black !important;
+    }
+
+    .article-content h1,
+    .article-content h2,
+    .article-content h3,
+    .article-content h4,
+    .article-content h5,
+    .article-content h6 {
+        color: black !important;
+        page-break-after: avoid;
+        font-size: 11pt;
+    }
+
+    .article-content h1 {
+        font-size: 16pt;
+    }
+
+    .article-content h2 {
+        font-size: 13pt;
+    }
+
+    .article-content p,
+    .article-content li {
+        color: black !important;
+        font-size: 9pt;
+        line-height: 1.3;
+    }
+
+    .article-content a {
+        color: #599bb8 !important;
+        text-decoration: none !important;
+    }
+
+    /* Two Column Layout - Print Version - FORCE IT */
+    .wp-block-columns,
+    .article-content .wp-block-columns {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .wp-block-column,
+    .article-content .wp-block-column {
+        display: inline-block !important;
+        vertical-align: top !important;
+        break-inside: avoid !important;
+        width: auto !important;
+        flex: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .wp-block-column:first-child,
+    .article-content .wp-block-column:first-child {
+        width: 74% !important;
+        font-size: 9pt;
+        padding-right: 0.5rem !important;
+    }
+
+    .wp-block-column:last-child,
+    .article-content .wp-block-column:last-child {
+        width: 25% !important;
+        font-size: 9pt;
+    }
+
+    /* Fix icons to be black in print */
+    .article-content .fa-brands,
+    .article-content .fa-solid,
+    .article-content .fa-regular {
+        filter: brightness(0) saturate(100%) !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+    }
+
+    /* Avoid breaking inside elements */
+    .article-content h1,
+    .article-content h2,
+    .article-content h3,
+    .article-content h4,
+    .article-content h5,
+    .article-content h6,
+    .article-content p,
+    .article-content ul,
+    .article-content ol {
+        page-break-inside: avoid;
+    }
+
+    /* Remove shadows and borders that don't print well */
+    .article-content * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    /* Ensure proper spacing */
+    .article-content h2 {
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .article-content h3 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    /* Compact lists for print */
+    .article-content ul,
+    .article-content ol {
+        margin-bottom: 0.25rem;
+        padding-left: 1rem;
+    }
+
+    .article-content li {
+        margin-bottom: 0.1rem;
+        font-size: 8.5pt;
+        line-height: 1.2;
+    }
+
+    /* Page margins */
+    @page {
+        margin: 0.5in;
+    }
+}

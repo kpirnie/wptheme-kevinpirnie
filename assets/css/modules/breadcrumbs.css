@@ -1,0 +1,19 @@
+/* Breadcrumbs */
+.breadcrumbs {
+    text-align: right;
+}
+
+nav[aria-label="Breadcrumb"] ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav[aria-label="Breadcrumb"] ol li {
+    display: inline;
+}
+
+
+.bc-last-item {
+    border-bottom: 1px solid #fd6a4f;
+}

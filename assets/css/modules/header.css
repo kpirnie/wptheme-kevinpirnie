@@ -1,0 +1,55 @@
+/* Additional custom styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Top header - always shows gradient background */
+#top-header {
+    background: linear-gradient(135deg, var(--kp-light-blue) 0%, var(--kp-darkest-blue) 100%);
+}
+
+#top-header a,
+#top-header span,
+#top-header button {
+    color: #ffffff;
+}
+
+#top-header a:hover,
+#top-header button:hover {
+    color: var(--kp-orange);
+}
+
+#top-header .menu a {
+    color: #ffffff;
+}
+
+/* Top header menu spacing */
+#top-header .menu li {
+    display: inline-block;
+}
+
+#top-header .menu li a,
+#top-header .menu li button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Top header menu fix */
+#top-header .menu li {
+    flex-shrink: 0;
+}
+
+#top-header .menu li a {
+    white-space: nowrap;
+}
+
+#top-header .w-full>div {
+    min-width: 0;
+}
+
+#top-header nav {
+    min-width: max-content;
+}

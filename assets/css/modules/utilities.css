@@ -1,0 +1,26 @@
+/* Scroll to top button icon fix */
+#scroll-to-top {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scroll-to-top .fa-solid {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.article-content+div a:hover,
+.article-content+div+div a:hover {
+    color: #ffffff !important;
+}
+
+.has-text-align-right {
+    text-align: right !important;
+}
+
+.has-text-align-left {
+    text-align: left !important;
+}

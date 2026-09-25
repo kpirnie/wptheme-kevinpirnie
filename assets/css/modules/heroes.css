@@ -1,0 +1,144 @@
+/* Hero Slider Styles */
+.kpt-hero-slideshow {
+    position: relative;
+    overflow: hidden;
+}
+
+.kpt-hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+.kpt-hero-slide.active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+.kpt-hero-slide.prev {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+/* Hero Content - Random Left/Right Positioning */
+.kpt-hero-content {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 33.333333%;
+    /* 33% width */
+    z-index: 10;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+
+.kpt-hero-slide:not(.active) .kpt-hero-content {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.kpt-hero-slide.active .kpt-hero-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.kpt-hero-content.position-left {
+    left: 0;
+    text-align: left;
+}
+
+.kpt-hero-content.position-right {
+    right: 0;
+    text-align: right;
+    align-items: flex-end;
+}
+
+.kpt-hero-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.kpt-hero-text {
+    font-size: 1rem;
+    color: white;
+}
+
+/* Navigation Buttons */
+.kpt-hero-prev,
+.kpt-hero-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 20;
+    transition: background 0.3s ease-in-out;
+}
+
+.kpt-hero-prev:hover,
+.kpt-hero-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.kpt-hero-prev {
+    left: 1rem;
+}
+
+.kpt-hero-next {
+    right: 1rem;
+}
+
+/* Single Hero Styles */
+.kpt-hero-single {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .kpt-hero-content {
+        width: 100%;
+        left: 0 !important;
+        right: auto !important;
+        height: auto;
+        bottom: 0;
+        top: auto;
+
+    }
+
+    .kpt-hero-title {
+        font-size: 1rem;
+    }
+
+    .kpt-hero-text {
+        font-size: .85rem;
+    }
+}
+
+.kpt-hero-content-single {
+    top: 50% !important;
+    height: 50% !important;
+    width: auto !important;
+}

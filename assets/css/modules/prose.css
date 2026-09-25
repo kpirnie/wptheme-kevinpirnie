@@ -1,0 +1,163 @@
+/* Widget heading fix for dark mode */
+.dark .widget .wp-block-heading,
+.dark .widget h1,
+.dark .widget h2,
+.dark .widget h3,
+.dark .widget h4,
+.dark .widget h5,
+.dark .widget h6 {
+    color: #f9fafb !important;
+}
+
+/* Prose styling for content */
+.prose {
+    max-width: 65ch;
+}
+
+/* Article content override */
+.article-content.prose {
+    max-width: 100% !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+    font-weight: 700;
+    margin-bottom: 0.75em;
+    line-height: 1.2;
+}
+
+.prose h1 {
+    font-size: 2.25em;
+}
+
+.prose h2 {
+    font-size: 1.875em;
+}
+
+.prose h3 {
+    font-size: 1.5em;
+}
+
+.prose h4 {
+    font-size: 1.25em;
+}
+
+.prose p {
+    margin-bottom: 1.25em;
+}
+
+.prose a {
+    color: var(--kp-light-blue);
+    text-decoration: underline;
+}
+
+.prose a:hover {
+    color: var(--kp-darkish-blue);
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.25em;
+}
+
+.prose img {
+    max-width: 100%;
+    height: auto;
+}
+
+.prose code {
+    background-color: #f3f4f6;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+}
+
+.prose pre {
+    background-color: var(--kp-navy);
+    color: #f9fafb;
+    padding: 1em;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.25em;
+}
+
+.prose blockquote {
+    border-left: 4px solid var(--kp-light-blue);
+    padding-left: 1em;
+    font-style: italic;
+    margin: 1.5em 0;
+}
+
+/* Dark mode prose */
+.dark .prose {
+    color: #e5e7eb;
+}
+
+.dark .prose a {
+    color: var(--kp-light-blue);
+}
+
+.dark .prose a:hover {
+    color: var(--kp-lightish-blue);
+}
+
+.dark .prose code {
+    background-color: #374151;
+    color: #f9fafb;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+    color: #f9fafb;
+}
+/* List styling for content areas */
+.article-content ul,
+.prose ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 1.5em;
+    margin-bottom: 1.25em;
+}
+
+.article-content ul li,
+.prose ul li {
+    margin-bottom: 0.5em;
+}
+
+.article-content ol,
+.prose ol {
+    list-style-type: decimal;
+    list-style-position: outside;
+    padding-left: 1.5em;
+    margin-bottom: 1.25em;
+}
+
+.article-content ol li,
+.prose ol li {
+    margin-bottom: 0.5em;
+}
+
+/* Nested lists */
+.article-content ul ul,
+.article-content ol ul,
+.prose ul ul,
+.prose ol ul {
+    list-style-type: circle;
+    margin-top: 0.5em;
+}
+
+.article-content ul ol,
+.article-content ol ol,
+.prose ul ol,
+.prose ol ol {
+    margin-top: 0.5em;
+}

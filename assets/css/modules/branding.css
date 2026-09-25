@@ -1,0 +1,136 @@
+/* Brand gradient text */
+.kp-gradient-text {
+    background: linear-gradient(135deg, var(--kp-light-blue) 0%, var(--kp-darkest-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Brand gradient background */
+.kp-gradient-bg {
+    background: linear-gradient(135deg, var(--kp-light-blue) 0%, var(--kp-darkest-blue) 100%);
+}
+
+.kp-gradient-bg:hover {
+    background: linear-gradient(135deg, var(--kp-lightish-blue) 0%, var(--kp-gray) 100%);
+}
+
+/* ========================================
+   Light Blue - #599bb8
+   ======================================== */
+.text-kp-light-blue {
+    color: var(--kp-light-blue);
+}
+
+.bg-kp-light-blue {
+    background-color: var(--kp-light-blue);
+}
+
+.border-kp-light-blue {
+    border-color: var(--kp-light-blue);
+}
+
+/* ========================================
+   Lightish Blue - #43819c
+   ======================================== */
+.text-kp-lightish-blue {
+    color: var(--kp-lightish-blue);
+}
+
+.bg-kp-lightish-blue {
+    background-color: var(--kp-lightish-blue);
+}
+
+.border-kp-lightish-blue {
+    border-color: var(--kp-lightish-blue);
+}
+
+/* ========================================
+   Gray (Blue) - #2d7696
+   ======================================== */
+.text-kp-gray {
+    color: var(--kp-gray);
+}
+
+.bg-kp-gray {
+    background-color: var(--kp-gray);
+}
+
+.border-kp-gray {
+    border-color: var(--kp-gray);
+}
+
+/* ========================================
+   Darkish Blue - #1c375c
+   ======================================== */
+.text-kp-darkish-blue {
+    color: var(--kp-darkish-blue);
+}
+
+.bg-kp-darkish-blue {
+    background-color: var(--kp-darkish-blue);
+}
+
+.border-kp-darkish-blue {
+    border-color: var(--kp-darkish-blue);
+}
+
+/* ========================================
+   Dark Blue - #01123c
+   ======================================== */
+.text-kp-dark-blue {
+    color: var(--kp-dark-blue);
+}
+
+.bg-kp-dark-blue {
+    background-color: var(--kp-dark-blue);
+}
+
+.border-kp-dark-blue {
+    border-color: var(--kp-dark-blue);
+}
+
+/* ========================================
+   Darkest Blue - #000d2d
+   ======================================== */
+.text-kp-darkest-blue {
+    color: var(--kp-darkest-blue);
+}
+
+.bg-kp-darkest-blue {
+    background-color: var(--kp-darkest-blue);
+}
+
+.border-kp-darkest-blue {
+    border-color: var(--kp-darkest-blue);
+}
+
+/* ========================================
+   Navy - #000d2d
+   ======================================== */
+.text-kp-navy {
+    color: var(--kp-navy);
+}
+
+.bg-kp-navy {
+    background-color: var(--kp-navy);
+}
+
+.border-kp-navy {
+    border-color: var(--kp-navy);
+}
+
+/* ========================================
+   Orange - #fd6a4f
+   ======================================== */
+.text-kp-orange {
+    color: var(--kp-orange);
+}
+
+.bg-kp-orange {
+    background-color: var(--kp-orange);
+}
+
+.border-kp-orange {
+    border-color: var(--kp-orange);
+}

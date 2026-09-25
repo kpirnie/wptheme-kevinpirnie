@@ -1,0 +1,129 @@
+/* WordPress Core Block Styles */
+
+/* Columns Block */
+.wp-block-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.wp-block-column {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Responsive columns */
+@media (max-width: 781px) {
+    .wp-block-columns {
+        flex-direction: column;
+    }
+}
+
+/* Specific column widths */
+.wp-block-column:not(:only-child) {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.wp-block-column[style*="flex-basis"] {
+    flex-grow: 0;
+}
+
+/* 66/33 split */
+.wp-block-columns.are-vertically-aligned-top {
+    align-items: flex-start;
+}
+
+/* Group Block */
+.wp-block-group {
+    margin-bottom: 2rem;
+}
+
+/* Heading styles in dark mode */
+.wp-block-heading,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #f9fafb;
+    margin-bottom: 1rem;
+}
+
+/* Paragraph styles */
+.wp-block-paragraph {
+    margin-bottom: 1.25rem;
+    color: #e5e7eb;
+}
+
+/* Button Block */
+.wp-block-button__link {
+    background: linear-gradient(to right, #599bb8, #2d7696);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.wp-block-button__link:hover {
+    background: linear-gradient(to right, #43819c, #2d7696);
+}
+
+/* Separator */
+.wp-block-separator {
+    border-top: 1px solid #4b5563;
+    margin: 2rem 0;
+}
+
+/* Quote */
+.wp-block-quote {
+    border-left: 4px solid #599bb8;
+    padding-left: 1rem;
+    font-style: italic;
+    margin: 1.5rem 0;
+    color: #d1d5db;
+}
+
+/* Code */
+.wp-block-code code {
+    background-color: #374151;
+    color: #f9fafb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: block;
+    overflow-x: auto;
+}
+
+/* List */
+.wp-block-list {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: #e5e7eb;
+}
+
+/* Image */
+.wp-block-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+/* Cover Block */
+.wp-block-cover {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+/* Spacer */
+.wp-block-spacer {
+    clear: both;
+}

@@ -1,0 +1,173 @@
+/* Header Logo Sizing */
+.header-logo {
+    display: block;
+    max-height: 80px;
+    max-width: 325px;
+    width: auto;
+    height: auto;
+}
+
+.header-logo svg {
+    display: block;
+    width: auto;
+    height: 80px;
+    max-width: 325px;
+    filter: brightness(1.4) contrast(1.1) saturate(1.15) drop-shadow(0 0 .5px rgba(255, 255, 255, 0.3));
+}
+
+/* Small Devices (576px - 639px) */
+@media (max-width: 639px) {
+    .header-logo {
+        max-height: 70px;
+        max-width: 285px;
+    }
+
+    .header-logo svg {
+        height: 70px;
+        max-width: 285px;
+    }
+}
+
+/* Extra Small Devices (< 576px) */
+@media (max-width: 575px) {
+    .header-logo {
+        max-height: 60px;
+        max-width: 240px;
+    }
+
+    .header-logo svg {
+        height: 60px;
+        max-width: 240px;
+    }
+}
+
+/* Primary Logo Colors */
+#kp-logo .light-blue {
+    fill: #599bb8 !important;
+}
+
+#kp-logo .lightish-blue {
+    fill: #43819c !important;
+}
+
+#kp-logo .blue {
+    fill: #2d7696 !important;
+}
+
+#kp-logo .darkish-blue {
+    fill: #1c375c !important;
+}
+
+#kp-logo .dark-blue {
+    fill: #01123c !important;
+}
+
+#kp-logo .darkest-blue {
+    fill: #000d2d !important;
+}
+
+#kp-logo .orange {
+    fill: #fd6a4f !important;
+}
+
+#kp-logo .gray {
+    fill: #ccc !important;
+}
+
+#kp-logo-name-first path,
+#kp-logo-name-last path {
+    stroke: #fff !important;
+    stroke-width: 2px !important;
+}
+
+#kp-logo-name-first path:last-child,
+#kp-logo-name-last path:last-child {
+    stroke: #fff !important;
+    stroke-width: 1px !important;
+}
+
+/* Avatar / Author Bio */
+.kp-avatar #kp-favicon .light-blue {
+    fill: #599bb8 !important;
+}
+
+.kp-avatar #kp-favicon .lightish-blue {
+    fill: #43819c !important;
+}
+
+.kp-avatar #kp-favicon .orange {
+    fill: #fd6a4f !important;
+}
+
+.kp-avatar #kp-favicon .gray {
+    fill: #2d7696 !important;
+}
+
+.kp-avatar #kp-favicon .darkish-blue {
+    fill: #599bb8 !important;
+}
+
+.kp-avatar #kp-favicon .dark-blue {
+    fill: #43819c !important;
+}
+
+.kp-avatar #kp-favicon .darkest-blue {
+    fill: #2d7696 !important;
+}
+
+.kp-avatar #kp-favicon .blue {
+    fill: #ccc !important;
+}
+
+.kp-avatar #kp-favicon-initials path:nth-child(-n + 2) {
+    stroke: #fff !important;
+    stroke-width: 2px !important;
+}
+
+.kp-avatar #kp-favicon-initials path:last-child {
+    stroke: #fff !important;
+    stroke-width: 1px !important;
+}
+
+/* Footer Logo */
+#kp-footer-logo .light-blue {
+    fill: #599bb8 !important;
+}
+
+#kp-footer-logo .lightish-blue {
+    fill: #43819c !important;
+}
+
+#kp-footer-logo .orange {
+    fill: #fd6a4f !important;
+}
+
+#kp-footer-logo .gray {
+    fill: #2d7696 !important;
+}
+
+#kp-footer-logo .darkish-blue {
+    fill: #599bb8 !important;
+}
+
+#kp-footer-logo .dark-blue {
+    fill: #43819c !important;
+}
+
+#kp-footer-logo .darkest-blue {
+    fill: #2d7696 !important;
+}
+
+#kp-footer-logo .blue {
+    fill: #ccc !important;
+}
+
+#kp-footer-logo-initials path:nth-child(-n + 2) {
+    stroke: #000d2d !important;
+    stroke-width: 2px !important;
+}
+
+#kp-footer-logo-initials path:last-child {
+    stroke: #000d2d !important;
+    stroke-width: 1px !important;
+}

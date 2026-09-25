@@ -1,0 +1,63 @@
+/* Component Styles */
+@layer components {
+    .container {
+        @apply max-w-7xl mx-auto px-4;
+    }
+
+    .btn-primary {
+        @apply px-6 py-2 text-white rounded-lg transition-all font-medium;
+        background: linear-gradient(to right, #599bb8, #2d7696);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(to right, #1d4ed8, #0f766e);
+    }
+
+    .btn-secondary {
+        @apply px-6 py-2 border-2 border-blue-600 dark:border-blue-400 text-[#599bb8] dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-800 rounded-lg transition-all font-medium;
+    }
+
+    .article-content {
+        @apply max-w-none w-full;
+    }
+
+    /* Define kp-gradient as a component class */
+    .bg-kp-gradient {
+        background: linear-gradient(to right, #599bb8, #2d7696);
+    }
+
+    /* Vertical separator for menu items */
+    .menu-separator {
+        position: relative;
+        padding-left: 1rem !important;
+    }
+
+    .menu-separator::before {
+        content: '';
+        position: absolute;
+        left: -0.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 1.25rem;
+        width: 2px;
+        background-color: #599bb8;
+        opacity: 0.5;
+    }
+
+    /* Nested dropdown button styling */
+    .submenu .dropdown-toggle {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem;
+    }
+
+    .submenu .dropdown-toggle span {
+        font-size: 0.875rem;
+    }
+
+    /* Hide top header on mobile/tablet */
+    @media (max-width: 1023px) {
+        #top-header {
+            display: none;
+        }
+    }
+}
