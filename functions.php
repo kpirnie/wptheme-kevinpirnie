@@ -64,9 +64,13 @@ add_action('init', function () {
         }
 
         // every path and domain they could live on
-        $host = parse_url(home_url(), PHP_URL_HOST);
+        $parts = explode('.', (string) parse_url(home_url(), PHP_URL_HOST));
         $paths = array_unique(array('/', COOKIEPATH, SITECOOKIEPATH));
-        $domains = array_unique(array_filter(array('', '.' . $host, (string) COOKIE_DOMAIN), 'is_string'));
+        $domains = array('', (string) COOKIE_DOMAIN);
+        for ($i = 0; $i < count($parts) - 1; $i++) {
+            $domains[] = implode('.', array_slice($parts, $i));
+        }
+        $domains = array_unique($domains);
 
         // expire them all
         foreach (array_unique($names) as $name) {

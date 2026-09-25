@@ -17,11 +17,15 @@ DOMReady(function () {
     }
 
     function clearCookies() {
-        const host = window.location.hostname;
+        const parts = window.location.hostname.split('.');
+        const domains = [''];
+        for (let i = 0; i < parts.length - 1; i++) {
+            domains.push(`;domain=${parts.slice(i).join('.')}`);
+        }
         document.cookie.split(';').forEach(function (pair) {
             const name = pair.split('=')[0].trim();
             if (!name || name === 'kp_cookie_consent') return;
-            ['', `;domain=${host}`, `;domain=.${host}`].forEach(function (domain) {
+            domains.forEach(function (domain) {
                 document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/${domain}`;
             });
         });
@@ -81,6 +85,7 @@ DOMReady(function () {
     // Keep wiping anything set client-side while declined
     if (cookieConsent === 'declined') {
         clearCookies();
+        window.addEventListener('load', clearCookies);
     }
 
     // Show cookie notice only if no consent decision has been made

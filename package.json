@@ -1,25 +1,19 @@
 {
     "name": "kevinpirnie-theme",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "scripts": {
         "build:tw": "tailwindcss -i ./assets/css/main.css -o ./assets/css/tw.css --minify",
         "build:concat-css": "cat ./assets/css/tw.css ./assets/css/fa-svg-icons.css > ./assets/css/theme.debug.css",
         "build:concat-js": "cat ./assets/js/modules/main.js ./assets/js/modules/cookie-notice.js ./assets/js/modules/hero-carousel.js ./assets/js/modules/main-menu.js ./assets/js/modules/mobile-menu.js ./assets/js/modules/scroll-to-top.js ./assets/js/modules/search.js ./assets/js/modules/portfolio-lazy.js ./assets/js/modules/top-header.js > ./assets/js/theme.debug.js",
-        "build:minify-css": "cssnano ./assets/css/theme.debug.css ./assets/css/theme.min.css",
+        "build:minify-css": "tailwindcss -i ./assets/css/theme.debug.css -o ./assets/css/theme.min.css --minify",
         "build:minify-js": "node esbuild.config.js",
         "build:clean": "rm -f ./assets/css/theme.debug.css ./assets/js/theme.debug.js",
         "build": "npm run build:tw && npm run build:concat-css && npm run build:concat-js && npm run build:minify-css && npm run build:minify-js && npm run build:clean"
     },
     "devDependencies": {
         "@tailwindcss/cli": "^4",
-        "cssnano": "^9",
-        "cssnano-cli": "^1",
         "esbuild": "^0.28.2",
-        "postcss": "^8",
         "tailwindcss": "^4"
-    },
-    "dependencies": {
-        "npm": "^12.1.0"
     },
     "allowScripts": {
         "@parcel/watcher": false,
