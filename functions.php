@@ -88,6 +88,28 @@ add_action('init', function () {
     });
 }, 0);
 
+// Google Consent Mode defaults, output ahead of any analytics tag so it holds no matter which plugin loads it
+add_action('wp_head', function () {
+?>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        (function() {
+            var state = /(?:^|;\s*)kp_cookie_consent=accepted(?:;|$)/.test(document.cookie) ? 'granted' : 'denied';
+            gtag('consent', 'default', {
+                ad_storage: state,
+                ad_user_data: state,
+                ad_personalization: state,
+                analytics_storage: state
+            });
+        })();
+    </script>
+<?php
+}, 0);
+
 function is_parent_page($page_id = null)
 {
     if ((is_page('about-kevin-pirnie/privacy-policy') || is_page('about-kevin-pirnie/cookie-policy') || is_page('about-kevin-pirnie/lets-talk')) || is_front_page()) {

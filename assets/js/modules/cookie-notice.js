@@ -31,6 +31,12 @@ DOMReady(function () {
         });
     }
 
+    function setConsent(state) {
+        if (typeof gtag === 'function') {
+            gtag('consent', 'update', { ad_storage: state, ad_user_data: state, ad_personalization: state, analytics_storage: state });
+        }
+    }
+
     function disableScroll() {
         document.body.style.overflow = 'hidden';
         document.body.style.paddingRight = (window.innerWidth - document.documentElement.clientWidth) + 'px';
@@ -101,6 +107,7 @@ DOMReady(function () {
     if (acceptBtn) {
         acceptBtn.addEventListener('click', function () {
             setCookie('kp_cookie_consent', 'accepted', 365);
+            setConsent('granted');
             notice.style.display = 'none';
             overlay.style.display = 'none';
             enableScroll();
@@ -111,6 +118,7 @@ DOMReady(function () {
     if (declineBtn) {
         declineBtn.addEventListener('click', function () {
             setCookie('kp_cookie_consent', 'declined', 182);
+            setConsent('denied');
             clearCookies();
             fetch(window.location.href, { method: 'HEAD', credentials: 'same-origin', cache: 'no-store' }).catch(function () { });
             notice.style.display = 'none';
