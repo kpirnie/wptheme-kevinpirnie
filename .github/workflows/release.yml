@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set version from style.css
+        id: version
+        run: |
+          VERSION=$(grep -m1 -oP '^Version:\s*\K\S+' style.css)
+          [ -n "$VERSION" ] || { echo "No Version in style.css"; exit 1; }
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Build release zip
+        run: |
+          # Create a clean staging directory using the theme slug
+          mkdir -p dist/wptheme-kevinpirnie
+
+          # Copy only the files that belong in the release
+          rsync -a ./ dist/wptheme-kevinpirnie/ \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='dist' \
+            --exclude='composer.json' \
+            --exclude='esbuild.config.js' \
+            --exclude='package.json' \
+            --exclude='tailwind.config.js'
+
+          # Zip it up with the theme folder as root
+          cd dist
+          zip -r ../wptheme-kevinpirnie-${{ steps.version.outputs.VERSION }}.zip wptheme-kevinpirnie/
+
+      - name: Create or overwrite GitHub Release
+        run: |
+          # Remove any existing release and tag for this version
+          gh release delete "v${{ steps.version.outputs.VERSION }}" --cleanup-tag -y || true
+
+          # Create the release against this commit
+          gh release create "v${{ steps.version.outputs.VERSION }}" \
+            "wptheme-kevinpirnie-${{ steps.version.outputs.VERSION }}.zip" \
+            --target "$GITHUB_SHA" \
+            --title "v${{ steps.version.outputs.VERSION }}" \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
