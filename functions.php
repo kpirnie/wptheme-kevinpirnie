@@ -6,6 +6,12 @@ defined('ABSPATH') || die('No direct script access allowed');
 // setup our path
 defined('KPT_PATH') || define('KPT_PATH', dirname(__FILE__) . '/');
 
+// behind the proxy nginx hands PHP a server name of "_" and an internal port, which loops Yoast's URL cleanup redirect
+if ('_' === ($_SERVER['SERVER_NAME'] ?? '')) {
+    $_SERVER['SERVER_NAME'] = parse_url(home_url(), PHP_URL_HOST);
+    $_SERVER['SERVER_PORT'] = is_ssl() ? '443' : '80';
+}
+
 // At our earliest point, fire this up
 add_action('after_setup_theme', function () {
 
