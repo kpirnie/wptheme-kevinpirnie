@@ -192,7 +192,7 @@ if( ! class_exists( 'KPT_Mobile_Nav_Walker' ) ) {
             
             // Add toggle button for parent items
             if ($has_children) {
-                $output .= '<button class="submenu-toggle p-2 hover:text-[#599bb8] transition-colors flex-shrink-0" aria-label="Toggle submenu for ' . esc_attr($title) . '" type="button">';
+                $output .= '<button class="submenu-toggle p-2 hover:text-[#599bb8] transition-colors shrink-0" aria-label="Toggle submenu for ' . esc_attr($title) . '" type="button">';
                 $output .= '<span class="fa-solid fa-chevron-down transform transition-transform"></span>';
                 $output .= '</button>';
                 $output .= '</div>';

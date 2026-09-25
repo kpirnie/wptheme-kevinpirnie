@@ -36,12 +36,26 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
     final class Framework
     {
         /**
-         * Singleton instance.
+         * Default maximum size for JSON imports (bytes).
          *
          * @since 1.0.0
-         * @var Framework|null
+         * @var int
          */
-        private static ?Framework $instance = null;
+        private const DEFAULT_MAX_IMPORT_BYTES = 1048576;
+        /**
+         * Multiton instances, keyed by consumer identifier.
+         *
+         * @since 1.0.0
+         * @var array<string, Framework>
+         */
+        private static array $instances = array();
+        /**
+         * The consumer identifier (plugin or theme slug) for this instance.
+         *
+         * @since 1.0.0
+         * @var string
+         */
+        private string $identifier = 'kpff';
         /**
          * Framework version.
          *
@@ -120,13 +134,14 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
          */
         private array $options_pages_by_slug = [];
         /**
-         * Private constructor to enforce singleton.
+         * Private constructor to enforce multiton.
          *
          * @since 1.0.0
          */
-        private function __construct()
+        private function __construct(string $identifier)
         {
-            // Intentionally empty - initialization happens in init().
+            // Hold this instance's consumer identifier.
+            $this->identifier = $identifier;
         }
 
         /**
@@ -153,18 +168,33 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         }
 
         /**
-         * Get the singleton instance.
+         * Get the framework instance for a consumer identifier.
          *
          * @since  1.0.0
+         * @param string $identifier The consumer identifier (plugin or theme slug).
          * @return Framework The singleton instance.
          */
-        public static function getInstance(): Framework
+        public static function getInstance(string $identifier = 'kpff'): Framework
         {
-            if (self::$instance === null) {
-                self::$instance = new self();
+            // Sanitize the key so lookups are consistent.
+            $identifier = sanitize_key($identifier);
+
+            if (! isset(self::$instances[$identifier])) {
+                self::$instances[$identifier] = new self($identifier);
             }
 
-            return self::$instance;
+            return self::$instances[$identifier];
+        }
+
+        /**
+         * Get this instance's consumer identifier.
+         *
+         * @since  1.0.0
+         * @return string The identifier (plugin or theme slug).
+         */
+        public function getIdentifier(): string
+        {
+            return $this->identifier;
         }
 
         /**
@@ -209,29 +239,29 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         private function registerHooks(): void
         {
             // Enqueue admin assets.
-            add_action('admin_enqueue_scripts', array( $this, 'enqueueAdminAssets' ));
+            add_action('admin_enqueue_scripts', array($this, 'enqueueAdminAssets'));
             // Register meta boxes.
-            add_action('add_meta_boxes', array( $this, 'registerMetaBoxes' ));
+            add_action('add_meta_boxes', array($this, 'registerMetaBoxes'));
             // Save meta box data.
-            add_action('save_post', array( $this, 'saveMetaBoxes' ), 10, 2);
+            add_action('save_post', array($this, 'saveMetaBoxes'), 10, 2);
             // Save user meta.
-            add_action('personal_options_update', array( $this, 'saveUserMeta' ));
-            add_action('edit_user_profile_update', array( $this, 'saveUserMeta' ));
+            add_action('personal_options_update', array($this, 'saveUserMeta'));
+            add_action('edit_user_profile_update', array($this, 'saveUserMeta'));
             // Register options pages.
-            add_action('admin_menu', array( $this, 'registerOptionsPages' ));
+            add_action('admin_menu', array($this, 'registerOptionsPages'));
             // Register settings.
-            add_action('admin_init', array( $this, 'registerSettings' ));
+            add_action('admin_init', array($this, 'registerSettings'));
             // Initialize blocks.
-            add_action('init', array( $this, 'registerBlocks' ));
+            add_action('init', array($this, 'registerBlocks'));
             // Add user profile fields.
-            add_action('show_user_profile', array( $this, 'renderUserMetaFields' ));
-            add_action('edit_user_profile', array( $this, 'renderUserMetaFields' ));
+            add_action('show_user_profile', array($this, 'renderUserMetaFields'));
+            add_action('edit_user_profile', array($this, 'renderUserMetaFields'));
             // Nav menu item custom fields.
-            add_action('wp_nav_menu_item_custom_fields', array( $this, 'renderNavMenuFields' ), 10, 5);
-            add_action('wp_update_nav_menu_item', array( $this, 'saveNavMenuFields' ), 10, 3);
-            // Handle export/import AJAX actions.
-            add_action('wp_ajax_kp_wsf_export_settings', array($this, 'ajaxExportSettings'));
-            add_action('wp_ajax_kp_wsf_import_settings', array($this, 'ajaxImportSettings'));
+            add_action('wp_nav_menu_item_custom_fields', array($this, 'renderNavMenuFields'), 10, 5);
+            add_action('wp_update_nav_menu_item', array($this, 'saveNavMenuFields'), 10, 3);
+            // Handle export/import AJAX actions, namespaced per consumer instance.
+            add_action(sprintf('wp_ajax_kp_wsf_export_settings_%s', $this->identifier), array($this, 'ajaxExportSettings'));
+            add_action(sprintf('wp_ajax_kp_wsf_import_settings_%s', $this->identifier), array($this, 'ajaxImportSettings'));
         }
 
         /**
@@ -283,7 +313,7 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         public function enqueueAdminAssets(string $hook_suffix): void
         {
             // Only load on relevant admin pages.
-            $dominated_screens = array( 'post.php', 'post-new.php', 'user-edit.php', 'profile.php', 'nav-menus.php' );
+            $dominated_screens = array('post.php', 'post-new.php', 'user-edit.php', 'profile.php', 'nav-menus.php');
             $is_options_page = $this->isFrameworkOptionsPage($hook_suffix);
             if (! in_array($hook_suffix, $dominated_screens, true) && ! $is_options_page) {
                 return;
@@ -302,10 +332,10 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
             wp_enqueue_style('jquery-ui-datepicker-style', '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css', array(), '1.13.2');
             // Enqueue jQuery Select2
             wp_enqueue_style('select2-css', 'https://cdn.jsdelivr.net/npm/select2@latest/dist/css/select2.min.css', array(), '4.1.0');
-            wp_enqueue_script('select2-js', 'https://cdn.jsdelivr.net/npm/select2@latest/dist/js/select2.min.js', array( 'jquery' ), '4.1.0', true);
+            wp_enqueue_script('select2-js', 'https://cdn.jsdelivr.net/npm/select2@latest/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
             // Enqueue code editor if available (WP 4.9+).
             if (function_exists('wp_enqueue_code_editor')) {
-                wp_enqueue_code_editor(array( 'type' => 'text/html' ));
+                wp_enqueue_code_editor(array('type' => 'text/html'));
             }
 
             // Framework admin styles.
@@ -317,14 +347,16 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
             // Framework admin script.
             $script_path = $this->assets_path . '/js/wsf-admin.js';
             if (file_exists($script_path)) {
-                wp_enqueue_script('kp-wsf-admin', $this->assets_url . '/js/wsf-admin.js', array( 'jquery', 'wp-color-picker', 'jquery-ui-datepicker', 'jquery-ui-sortable' ), self::VERSION, true);
+                wp_enqueue_script('kp-wsf-admin', $this->assets_url . '/js/wsf-admin.js', array('jquery', 'wp-color-picker', 'jquery-ui-datepicker', 'jquery-ui-sortable'), self::VERSION, true);
                 // Localize script with framework data.
                 wp_localize_script(
                     'kp-wsf-admin',
                     'kpWsfAdmin',
                     array(
-                        'ajaxUrl' => admin_url('admin-ajax.php'),
-                        'nonce'   => wp_create_nonce('kp_wsf_nonce'),
+                        'ajaxUrl'      => admin_url('admin-ajax.php'),
+                        'nonce'        => wp_create_nonce('kp_wsf_nonce'),
+                        'exportAction' => sprintf('kp_wsf_export_settings_%s', $this->identifier),
+                        'importAction' => sprintf('kp_wsf_import_settings_%s', $this->identifier),
                         'i18n'    => array(
                             'confirmDelete' => __('Are you sure you want to remove this item?', 'kp-wsf'),
                             'mediaTitle'    => __('Select or Upload', 'kp-wsf'),
@@ -370,7 +402,7 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         public function addOptionsPage(array $config): OptionsPage
         {
             $page = new OptionsPage($config, $this->field_types, $this->storage);
-            $this->options_pages[ $page->getMenuSlug() ] = $page;
+            $this->options_pages[$page->getMenuSlug()] = $page;
             $this->options_pages_by_slug[$page->getMenuSlug()] = $page;
             return $page;
         }
@@ -385,7 +417,7 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         public function addMetaBox(array $config): MetaBox
         {
             $meta_box = new MetaBox($config, $this->field_types, $this->storage);
-            $this->meta_boxes[ $meta_box->getId() ] = $meta_box;
+            $this->meta_boxes[$meta_box->getId()] = $meta_box;
             // Register block if configured.
             if (! empty($config['create_block']) && $config['create_block'] === true) {
                 $this->block_generator->registerFromMetaBox($meta_box);
@@ -685,11 +717,13 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         {
             check_ajax_referer('kp_wsf_nonce', 'nonce');
 
-            if (!current_user_can('manage_options')) {
-                wp_send_json_error(['message' => __('Permission denied.', 'kp-wsf')]);
-            }
-
             $menu_slug = isset($_POST['menu_slug']) ? sanitize_key($_POST['menu_slug']) : '';
+            $required_capability = $this->getCapabilityForMenuSlug($menu_slug);
+
+            if (! current_user_can($required_capability)) {
+                wp_send_json_error(['message' => __('Permission denied.', 'kp-wsf')]);
+                return;
+            }
 
             if (!empty($menu_slug)) {
                 // Export specific options page with defaults.
@@ -723,15 +757,26 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
         {
             check_ajax_referer('kp_wsf_nonce', 'nonce');
 
-            if (!current_user_can('manage_options')) {
-                wp_send_json_error(['message' => __('Permission denied.', 'kp-wsf')]);
-            }
-
             $json = isset($_POST['json']) ? wp_unslash($_POST['json']) : '';
             $menu_slug = isset($_POST['menu_slug']) ? sanitize_key($_POST['menu_slug']) : '';
+            $required_capability = $this->getCapabilityForMenuSlug($menu_slug);
+
+            if (! current_user_can($required_capability)) {
+                wp_send_json_error(['message' => __('Permission denied.', 'kp-wsf')]);
+                return;
+            }
 
             if (empty($json)) {
                 wp_send_json_error(['message' => __('No data provided.', 'kp-wsf')]);
+                return;
+            }
+
+            $max_import_bytes = (int) apply_filters('kp_wsf_max_import_bytes', self::DEFAULT_MAX_IMPORT_BYTES, $menu_slug);
+            if ($max_import_bytes > 0 && strlen($json) > $max_import_bytes) {
+                wp_send_json_error([
+                    'message' => __('Import file is too large.', 'kp-wsf'),
+                ]);
+                return;
             }
 
             // Determine allowed options.
@@ -764,6 +809,25 @@ if (! class_exists('\KP\WPFieldFramework\Framework')) {
                     'errors'  => $result['errors'],
                 ]);
             }
+        }
+
+        /**
+         * Get the required capability for export/import by menu slug.
+         *
+         * @since  1.0.0
+         * @param  string $menu_slug The options page menu slug.
+         * @return string            Capability to require.
+         */
+        private function getCapabilityForMenuSlug(string $menu_slug): string
+        {
+            if (! empty($menu_slug)) {
+                $page = $this->getOptionsPageBySlug($menu_slug);
+                if ($page instanceof OptionsPage) {
+                    return $page->getCapability();
+                }
+            }
+
+            return 'manage_options';
         }
     }
 }

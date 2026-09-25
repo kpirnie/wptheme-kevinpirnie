@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
                 'post__not_in' => array(get_the_ID())
             ));
             foreach($recent_portfolio as $portfolio_item) {
-                echo '<a href="' . get_permalink($portfolio_item->ID) . '" class="inline-block px-3 py-1 bg-gray-700 text-gray-300 rounded-full hover:bg-gradient-to-r hover:from-[#599bb8] hover:to-[#2d7696] hover:text-white transition-all text-sm">' . esc_html($portfolio_item->post_title) . '</a>';
+                echo '<a href="' . get_permalink($portfolio_item->ID) . '" class="inline-block px-3 py-1 bg-gray-700 text-gray-300 rounded-full hover:bg-linear-to-r hover:from-[#599bb8] hover:to-[#2d7696] hover:text-white transition-all text-sm">' . esc_html($portfolio_item->post_title) . '</a>';
             }
             ?>
         </div>

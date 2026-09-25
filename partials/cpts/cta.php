@@ -30,7 +30,7 @@ $has_bg_image = ! empty( $cta_featured_image );
 ?>
 
 <div class="kpt-cta-container w-full my-8">
-    <div class="kpt-cta relative overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl <?php echo $has_bg_image ? 'min-h-[300px]' : 'bg-gradient-to-br from-gray-800 to-gray-900'; ?>">
+    <div class="kpt-cta relative overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-xl <?php echo $has_bg_image ? 'min-h-[300px]' : 'bg-linear-to-br from-gray-800 to-gray-900'; ?>">
         
         <?php if ( $has_bg_image ) : ?>
             <!-- Background Image with Overlay -->

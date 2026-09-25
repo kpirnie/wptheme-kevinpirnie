@@ -21,7 +21,7 @@ $have_widgets = in_array( true, array( is_active_sidebar('footer-1'), is_active_
         </main>
 
         <!-- Scroll to Top Button -->
-        <button id="scroll-to-top" class="fixed bottom-8 right-8 bg-gradient-to-r from-[#599bb8] to-[#2d7696] text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:from-[#43819c] hover:to-[#2d7696] z-40" aria-label="Scroll to top">
+        <button id="scroll-to-top" class="fixed bottom-8 right-8 bg-linear-to-r from-[#599bb8] to-[#2d7696] text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:from-[#43819c] hover:to-[#2d7696] z-40" aria-label="Scroll to top">
             <span class="fa-solid fa-arrow-up-from-bracket inline-block w-6 h-6"></span>
         </button>
 

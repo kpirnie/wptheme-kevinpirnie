@@ -20,10 +20,10 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
             <input type="search" 
                 name="s" 
                 placeholder="Search..." 
-                class="flex-1 px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                class="flex-1 px-3 py-2 rounded-lg border border-gray-700 bg-gray-900 text-gray-100 focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
                 value="<?php echo get_search_query(); ?>">
             <button type="submit" 
-                    class="px-4 py-2 bg-gradient-to-r from-[#599bb8] to-[#2d7696] text-white rounded-lg transition-all hover:from-[#43819c] hover:to-[#2d7696]">
+                    class="px-4 py-2 bg-linear-to-r from-[#599bb8] to-[#2d7696] text-white rounded-lg transition-all hover:from-[#43819c] hover:to-[#2d7696]">
                 <span class="fa-solid fa-magnifying-glass"></span>
             </button>
         </div>

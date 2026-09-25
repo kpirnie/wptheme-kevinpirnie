@@ -1,8 +1,10 @@
+/* Container */
+@utility container {
+    @apply max-w-7xl mx-auto px-4;
+}
+
 /* Component Styles */
 @layer components {
-    .container {
-        @apply max-w-7xl mx-auto px-4;
-    }
 
     .btn-primary {
         @apply px-6 py-2 text-white rounded-lg transition-all font-medium;

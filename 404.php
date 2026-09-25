@@ -30,8 +30,8 @@ get_header( );
         <div class="mt-12">
             <form role="search" method="get" action="<?php echo home_url( '/' ); ?>" class="max-w-md mx-auto">
                 <div class="flex gap-2">
-                    <input type="search" name="s" placeholder="Search..." class="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button type="submit" class="px-6 py-2 bg-gradient-to-r bg-kp-gradient hover:from-blue-700 hover:to-teal-700 text-white rounded-lg transition-all">
+                    <input type="search" name="s" placeholder="Search..." class="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="px-6 py-2 bg-linear-to-r bg-kp-gradient hover:from-blue-700 hover:to-teal-700 text-white rounded-lg transition-all">
                         <span class="fa-solid fa-magnifying-glass"></span>
                     </button>
                 </div>

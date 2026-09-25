@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
 
 ?>
 <!-- Cookie Notice Overlay -->
-<div id="kp-cookie-overlay" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50"></div>
+<div id="kp-cookie-overlay" class="hidden fixed inset-0 bg-black/75 z-50"></div>
 
 <!-- Cookie Notice -->
 <div id="kp-cookie-notice" class="hidden fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-6 shadow-lg z-50 border-t-4 border-[#599bb8]">
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
                 <button id="kp-cookie-decline" class="px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors font-semibold">
                     Decline
                 </button>
-                <button id="kp-cookie-accept" class="px-8 py-3 bg-gradient-to-r from-[#599bb8] to-[#2d7696] hover:from-[#43819c] hover:to-[#2d7696] rounded-lg transition-colors font-semibold">
+                <button id="kp-cookie-accept" class="px-8 py-3 bg-linear-to-r from-[#599bb8] to-[#2d7696] hover:from-[#43819c] hover:to-[#2d7696] rounded-lg transition-colors font-semibold">
                     Accept
                 </button>
             </div>
@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
 
 <!-- Cookie Policy Modal -->
 <div id="kp-cookie-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-    <div id="kp-modal-overlay" class="absolute inset-0 bg-black bg-opacity-75"></div>
+    <div id="kp-modal-overlay" class="absolute inset-0 bg-black/75"></div>
     <div class="relative bg-gray-800 rounded-lg max-w-4xl w-full max-h-[85vh] overflow-hidden flex flex-col">
         <div class="flex items-center justify-between p-6 border-b border-gray-700">
             <h2 class="text-2xl font-bold">Cookie Policy</h2>

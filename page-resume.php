@@ -268,7 +268,7 @@ $resume_contact_right = get_post_meta($id, 'resume_contact_right', true);
     </main>
 
     <!-- Scroll to Top Button -->
-    <button id="scroll-to-top" class="hide-print fixed bottom-8 right-8 bg-gradient-to-r from-[#599bb8] to-[#2d7696] text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:from-[#43819c] hover:to-[#2d7696] z-40" aria-label="Scroll to top">
+    <button id="scroll-to-top" class="hide-print fixed bottom-8 right-8 bg-linear-to-r from-[#599bb8] to-[#2d7696] text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:from-[#43819c] hover:to-[#2d7696] z-40" aria-label="Scroll to top">
         <span class="fa-solid fa-arrow-up-from-bracket inline-block w-6 h-6"></span>
     </button>
     <footer class="hide-print bg-gray-800 border-t border-gray-700 mt-8">

@@ -54,7 +54,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                     id="first_name" 
                     name="first_name" 
                     required
-                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
                 >
             </div>
             <div>
@@ -66,7 +66,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                     id="last_name" 
                     name="last_name" 
                     required
-                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
                 >
             </div>
         </div>
@@ -82,7 +82,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                     id="email" 
                     name="email" 
                     required
-                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
                 >
             </div>
             <div>
@@ -93,7 +93,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                     type="tel" 
                     id="phone" 
                     name="phone"
-                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
                 >
             </div>
         </div>
@@ -108,7 +108,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                 id="url" 
                 name="url"
                 placeholder="https://"
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
             >
         </div>
 
@@ -122,7 +122,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                 name="message" 
                 rows="6" 
                 required
-                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#599bb8]"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-[#599bb8]"
             ></textarea>
         </div>
 
@@ -134,7 +134,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
                     name="privacy_consent" 
                     id="privacy_consent" 
                     required
-                    class="mt-1 mr-3 h-4 w-4 text-[#599bb8] border-gray-300 rounded focus:ring-[#599bb8]"
+                    class="mt-1 mr-3 h-4 w-4 text-[#599bb8] border-gray-300 rounded-sm focus:ring-[#599bb8]"
                 >
                 <span class="text-sm text-gray-700 dark:text-gray-300">
                     <span class="text-red-500">*</span> I agree to the <a href="/about-kevin-pirnie/privacy-policy/" target="_blank" class="text-[#599bb8] hover:text-[#43819c] underline">Privacy Policy</a>. 
@@ -168,7 +168,7 @@ $success = isset( $_GET['contact_success'] ) && $_GET['contact_success'] == '1';
     </form>
 
     <!-- Loading Overlay -->
-    <div id="contact-form-loading" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex items-center justify-center">
+    <div id="contact-form-loading" class="hidden fixed inset-0 bg-gray-900/75 z-50 flex items-center justify-center">
         <div class="text-center">
             <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#599bb8] mb-4"></div>
             <p class="text-white text-lg font-medium">Sending your message...</p>
